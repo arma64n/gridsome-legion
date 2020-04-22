@@ -2,7 +2,7 @@
   <Layout>
     <h1>Matches</h1>
     <ul>
-      <li v-for="match in $page.allStrapiMatches.edges">
+      <li v-for="match in $page.matches.edges">
         {{ match.node.date }}
         {{ match.node.city.title }}
         {{ match.node.opponent.title }}
@@ -12,27 +12,27 @@
 </template>
 
 <page-query>
-{
-allStrapiMatches {
-  edges {
-    node {
-      date
-      city {
-        title
-      }
-      opponent {
-        title
+query {
+  matches: allStrapiMatches (sortBy: "date") {
+    edges {
+      node {
+        date
+        city {
+          title
+        }
+        opponent {
+          title
+        }
       }
     }
   }
-}
 }
 </page-query>
 
 <script>
 export default {
   metaInfo: {
-    title: "Matches",
-  },
+    title: "Matches"
+  }
 };
 </script>

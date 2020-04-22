@@ -11,6 +11,7 @@
       </nav>
     </header>
     <slot />
+    <footer>footer at the bottom of the page</footer>
   </div>
 </template>
 

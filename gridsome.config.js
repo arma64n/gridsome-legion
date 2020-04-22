@@ -16,4 +16,12 @@ module.exports = {
       },
     },
   ],
+  templates: {
+    StrapiLegioners: [
+      {
+        path: "/legioners/:id",
+        component: "@/src/templates/Legioner.vue",
+      },
+    ],
+  },
 };

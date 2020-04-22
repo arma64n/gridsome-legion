@@ -1,7 +1,11 @@
 <template>
-  <Layout> </Layout>
+  <div>123</div>
 </template>
 
-<script>
-export default {};
-</script>
+<page-query>
+{
+	strapiLegioners (id: "5ea0096eea40c9569ca5acf4") {
+    title
+  }
+}
+</page-query>
