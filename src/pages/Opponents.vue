@@ -2,11 +2,11 @@
   <Layout>
     <van-cell-group>
       <van-cell
-        v-for="legioner in $static.legioners.edges"
-        :to="legioner.node.path"
-        :title="legioner.node.title"
-        :key="legioner.node.title"
-        :value="legioner.node.matches.length"
+        v-for="opponent in $static.opponents.edges"
+        :to="opponent.node.path"
+        :title="opponent.node.title"
+        :key="opponent.node.title"
+        :value="opponent.node.matches.length"
         is-link
       />
     </van-cell-group>
@@ -15,11 +15,11 @@
 
 <static-query>
 query {
-  legioners: allStrapiLegioners (sortBy: "matches") {
+  opponents: allStrapiOpponents(sortBy: "title", order: ASC) {
     edges {
       node {
-        path
         title
+        path
         matches {
           id
         }
@@ -32,7 +32,7 @@ query {
 <script>
 export default {
   metaInfo: {
-    title: "Легионеры"
+    title: "Соперники"
   }
 };
 </script>

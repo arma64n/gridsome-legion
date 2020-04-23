@@ -20,7 +20,25 @@ module.exports = {
     StrapiLegioners: [
       {
         path: "/legioners/:id",
-        component: "@/src/templates/Legioner.vue",
+        component: "@/src/templates/StrapiLegioners.vue",
+      },
+    ],
+    StrapiMatches: [
+      {
+        path: "/matches/:id",
+        component: "@/src/templates/StrapiMatches.vue",
+      },
+    ],
+    StrapiCities: [
+      {
+        path: "/cities/:id",
+        component: "@/src/templates/StrapiCities.vue",
+      },
+    ],
+    StrapiOpponents: [
+      {
+        path: "/opponets/:id",
+        component: "@/src/templates/StrapiOpponents.vue",
       },
     ],
   },

@@ -1,27 +1,44 @@
 <template>
-  <div class="layout">
-    <header class="header">
-      <strong>
-        <g-link to="/">{{ $static.metadata.siteName }}</g-link>
-      </strong>
-      <nav class="nav">
-        <g-link class="nav__link" to="/">Home</g-link>
-        <g-link class="nav__link" to="/legioners/">Legioners</g-link>
-        <g-link class="nav__link" to="/matches/">Matches</g-link>
-      </nav>
+  <div>
+    <header>
+      <van-nav-bar title="Legion On Tour" :fixed="true" @click-left="onClickLeft()" />
     </header>
-    <slot />
-    <footer>footer at the bottom of the page</footer>
+    <div class="content">
+      <slot />
+    </div>
+    <footer>
+      <van-tabbar v-model="activeTab">
+        <van-tabbar-item
+          v-for="(link, index) in links"
+          :key="link.icon"
+          :to="link.path"
+          :icon="activeTab == index ? link.icon : `${link.icon}-o`"
+        ></van-tabbar-item>
+      </van-tabbar>
+    </footer>
   </div>
 </template>
 
-<static-query>
-query {
-  metadata {
-    siteName
+<script>
+export default {
+  data() {
+    return {
+      activeTab: 0,
+      links: [
+        { icon: "friends", path: "/" },
+        { icon: "underway", path: "/matches" },
+        { icon: "location", path: "/cities" },
+        { icon: "fire", path: "/opponents" }
+      ]
+    };
+  },
+  methods: {
+    onClickLeft() {
+      console.log("go back");
+    }
   }
-}
-</static-query>
+};
+</script>
 
 <style>
 body {
@@ -32,22 +49,7 @@ body {
   line-height: 1.5;
 }
 
-.layout {
-  max-width: 760px;
-  margin: 0 auto;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  height: 80px;
-}
-
-.nav__link {
-  margin-left: 20px;
+.content {
+  padding: 46px 0 50px 0;
 }
 </style>

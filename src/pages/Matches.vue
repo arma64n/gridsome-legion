@@ -1,21 +1,25 @@
 <template>
   <Layout>
-    <h1>Matches</h1>
-    <ul>
-      <li v-for="match in $page.matches.edges">
-        {{ match.node.date }}
-        {{ match.node.city.title }}
-        {{ match.node.opponent.title }}
-      </li>
-    </ul>
+    <van-cell-group>
+      <van-cell
+        v-for="match in $static.matches.edges"
+        :to="match.node.path"
+        :title="match.node.opponent.title"
+        :key="match.node.date"
+        :value="match.node.date"
+        :label="match.node.city.title"
+        is-link
+      />
+    </van-cell-group>
   </Layout>
 </template>
 
-<page-query>
+<static-query>
 query {
   matches: allStrapiMatches (sortBy: "date") {
     edges {
       node {
+        path
         date
         city {
           title
@@ -27,12 +31,12 @@ query {
     }
   }
 }
-</page-query>
+</static-query>
 
 <script>
 export default {
   metaInfo: {
-    title: "Matches"
+    title: "Матчи"
   }
 };
 </script>
