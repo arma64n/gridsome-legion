@@ -1,16 +1,15 @@
 <template>
   <Layout>
-    <van-cell-group>
-      <van-cell
-        v-for="match in $static.matches.edges"
-        :to="match.node.path"
-        :title="match.node.opponent.title"
-        :key="match.node.date"
-        :value="match.node.date"
-        :label="match.node.city.title"
-        is-link
-      />
-    </van-cell-group>
+    <g-link
+      v-for="match in $static.matches.edges"
+      :key="match.node.date"
+      :to="match.node.path"
+    >
+      <div>
+        <h2>{{ match.node.opponent.title }}</h2>
+        <opponent-logo :opponent="match.node.opponent.title"></opponent-logo>
+      </div>
+    </g-link>
   </Layout>
 </template>
 
@@ -34,9 +33,14 @@ query {
 </static-query>
 
 <script>
+import OpponentLogo from "@/components/OpponentLogo";
+
 export default {
   metaInfo: {
-    title: "Матчи"
-  }
+    title: "Матчи",
+  },
+  components: {
+    OpponentLogo,
+  },
 };
 </script>
