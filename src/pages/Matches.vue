@@ -1,32 +1,35 @@
 <template>
   <Layout>
-    <div
-      class="match"
-      v-for="match in $static.matches.edges"
-      :key="match.node.date"
-    >
-      <div class="match__logo">
-        <g-link :to="match.node.path">
-          <opponent-logo :opponent="match.node.opponent.title"></opponent-logo>
-        </g-link>
-      </div>
-      <div class="match__info">
-        <div>
-          <p class="match__title">{{ match.node.opponent.title }}</p>
-          <p class="match__city">{{ match.node.city.title }}</p>
-        </div>
-        <div class="match__footer">
-          <p>{{ match.node.legioners.length }} чел.</p>
-          <p class="match__date">{{ match.node.date }}</p>
-        </div>
-      </div>
+    <div>
+      <transition-group name="fade">
+        <match-block
+          v-for="match in loadedMatches"
+          :key="match.node.date"
+          :match="match"
+        ></match-block>
+      </transition-group>
+      <ClientOnly>
+        <infinite-loading @infinite="infiniteHandler" spinner="spiral">
+          <div slot="no-more">
+            You've scrolled through all the posts ;)
+          </div>
+          <div slot="no-results">
+            Sorry, no posts yet :(
+          </div></infinite-loading
+        >
+      </ClientOnly>
     </div>
   </Layout>
 </template>
 
-<static-query>
-query {
-  matches: allStrapiMatches (sortBy: "date") {
+<page-query>
+query($page: Int) {
+  matches: allStrapiMatches(sortBy: "date", perPage: 10, page: $page)
+    @paginate {
+    pageInfo {
+      totalPages
+      currentPage
+    }
     edges {
       node {
         path
@@ -44,63 +47,53 @@ query {
     }
   }
 }
-</static-query>
+</page-query>
 
 <script>
-import OpponentLogo from "@/components/OpponentLogo";
+import MatchBlock from "@/components/MatchBlock";
 
 export default {
   metaInfo: {
     title: "Матчи",
   },
   components: {
-    OpponentLogo,
+    MatchBlock,
+  },
+  data() {
+    return {
+      loadedMatches: [],
+      currentPage: 1,
+    };
+  },
+  created() {
+    this.loadedMatches.push(...this.$page.matches.edges);
+  },
+  methods: {
+    async infiniteHandler($state) {
+      if (this.currentPage + 1 > this.$page.matches.pageInfo.totalPages) {
+        $state.complete();
+      } else {
+        const { data } = await this.$fetch(`/matches/${this.currentPage + 1}`);
+        if (data.matches.edges.length) {
+          this.currentPage = data.matches.pageInfo.currentPage;
+          this.loadedMatches.push(...data.matches.edges);
+          $state.loaded();
+        } else {
+          $state.complete();
+        }
+      }
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.match {
-  background: var(--bg-block);
-  border-radius: 8px;
-  display: flex;
-  margin-bottom: 2rem;
-  overflow: hidden;
-
-  &__logo {
-    width: 8rem;
-    height: 8rem;
-    background: var(--color-white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  &__info {
-    flex: 1;
-    padding: 1rem;
-    color: var(--color-secondary);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  &__title {
-    margin-bottom: 0.5rem;
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: var(--color-white);
-  }
-
-  &__date {
-    font-size: 1.2rem;
-    color: var(--color-white);
-  }
-
-  &__footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.fade-enter-active,
+.fade-leave-active {
+  transition: ease opacity 0.3s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
