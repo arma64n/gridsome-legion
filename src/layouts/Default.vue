@@ -44,15 +44,20 @@ export default {
 </script>
 
 <style lang="scss">
+.content {
+  padding: 1.4rem;
+}
+
 .footer {
   position: fixed;
   bottom: 0;
   width: 100%;
   display: flex;
   justify-content: space-between;
-  background: var(--bg-footer);
-  padding: 14px 19px;
+  background: var(--bg-main);
+  padding: 1.2rem 1.6rem;
   box-sizing: border-box;
+  border-radius: 12px 12px 0px 0px;
 
   &__link {
     width: 50px;
@@ -62,17 +67,21 @@ export default {
     align-items: center;
     justify-content: center;
 
+    path {
+      fill: var(--color-secondary);
+    }
+
     &--active {
       background: var(--bg-gradient);
 
       path {
-        fill: #f8a170;
+        fill: var(--color-accent);
       }
     }
   }
 
   &__svg {
-    width: 24px;
+    width: 2rem;
   }
 }
 </style>

@@ -1,14 +1,28 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
 
 :root {
+  --bg-main: #1e1f28;
+  --bg-block: #2a2c36;
   --bg-footer: #ffffff;
   --bg-gradient: linear-gradient(
     91.97deg,
     rgba(255, 199, 167, 0.2) 14.73%,
     rgba(255, 213, 121, 0.2) 97.52%
   );
+  --color-white: #f6f6f6;
+  --color-secondary: #abb4bd;
+  --color-accent: #f8a170;
+}
+
+html {
+  font-size: 12px;
 }
 
 body {
   font-family: "Nunito", sans-serif;
+  background: var(--bg-main);
+}
+
+p {
+  margin: 0;
 }

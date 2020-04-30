@@ -1,5 +1,10 @@
 <template>
-  <g-image :src="`/clubs/${logo}.png`"></g-image>
+  <div>
+    <g-image
+      :src="require(`!!assets-loader!@/assets/clubs/${logo}.png`)"
+      class="logo"
+    ></g-image>
+  </div>
 </template>
 
 <script>
@@ -85,3 +90,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.logo {
+  width: 6rem;
+  height: 6rem;
+  object-fit: contain;
+}
+</style>

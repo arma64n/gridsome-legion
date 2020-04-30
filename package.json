@@ -9,6 +9,7 @@
   "dependencies": {
     "@gridsome/source-strapi": "^0.1.0",
     "gridsome": "^0.7.0",
+    "normalize.css": "^8.0.1",
     "vant": "^2.6.3"
   },
   "devDependencies": {
