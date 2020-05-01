@@ -51,7 +51,6 @@ export default {
   &__info {
     flex: 1;
     padding: 1rem;
-    color: var(--color-secondary);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
