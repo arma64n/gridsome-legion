@@ -49,15 +49,18 @@ export default {
 }
 
 .footer {
-  position: fixed;
+  position: sticky;
   bottom: 0;
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background: var(--bg-main);
-  padding: 1.2rem 1.6rem;
+  padding: 0 1.6rem;
   box-sizing: border-box;
   border-radius: 12px 12px 0px 0px;
+  height: 80px;
+  border-top: 1px solid var(--bg-block);
 
   &__link {
     width: 50px;
@@ -82,6 +85,7 @@ export default {
 
   &__svg {
     width: 2rem;
+    height: 2rem;
   }
 }
 </style>

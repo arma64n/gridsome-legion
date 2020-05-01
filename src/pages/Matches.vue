@@ -10,9 +10,7 @@
       </transition-group>
       <ClientOnly>
         <infinite-loading @infinite="infiniteHandler" spinner="spiral">
-          <div slot="no-more">
-            You've scrolled through all the posts ;)
-          </div>
+          <div slot="no-more"></div>
           <div slot="no-results">
             Sorry, no posts yet :(
           </div></infinite-loading

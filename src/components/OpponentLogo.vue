@@ -3,6 +3,7 @@
     <g-image
       :src="require(`!!assets-loader!@/assets/clubs/${logo}.png`)"
       class="logo"
+      :class="{ 'logo--small': small }"
     ></g-image>
   </div>
 </template>
@@ -12,6 +13,7 @@ export default {
   name: "match-logo",
   props: {
     opponent: String,
+    small: Boolean,
   },
   computed: {
     logo() {
@@ -96,5 +98,11 @@ export default {
   width: 6rem;
   height: 6rem;
   object-fit: contain;
+
+  &--small {
+    width: 3rem;
+    height: 3rem;
+    vertical-align: middle;
+  }
 }
 </style>

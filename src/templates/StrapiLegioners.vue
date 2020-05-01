@@ -1,6 +1,5 @@
 <template>
   <Layout>
-    <h1>Legioner</h1>
     <pre>{{ $page }}</pre>
   </Layout>
 </template>

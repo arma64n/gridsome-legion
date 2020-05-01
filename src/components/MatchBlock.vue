@@ -39,6 +39,10 @@ export default {
   margin-bottom: 2rem;
   overflow: hidden;
 
+  &:last-child {
+    margin-bottom: 0;
+  }
+
   &__logo {
     width: 8rem;
     height: 8rem;

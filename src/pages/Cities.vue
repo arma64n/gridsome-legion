@@ -1,19 +1,10 @@
 <template>
   <Layout>
-    <van-cell-group>
-      <van-cell
-        v-for="city in $static.cities.edges"
-        :to="city.node.path"
-        :title="city.node.title"
-        :key="city.node.title"
-        :value="city.node.matches.length"
-        is-link
-      />
-    </van-cell-group>
+    <common-block v-for="city in $page.cities.edges" :key="city.node.title" :common="city"></common-block>
   </Layout>
 </template>
 
-<static-query>
+<page-query>
 query {
   cities: allStrapiCities(sortBy: "title", order: ASC) {
     edges {
@@ -27,12 +18,17 @@ query {
     }
   }
 }
-</static-query>
+</page-query>
 
 <script>
+import CommonBlock from "@/components/CommonBlock";
+
 export default {
   metaInfo: {
     title: "Города"
+  },
+  components: {
+    CommonBlock
   }
 };
 </script>

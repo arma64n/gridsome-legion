@@ -1,15 +1,6 @@
 <template>
   <Layout>
-    <h1>{{ totalCount }}</h1>
-    <van-cell-group>
-      <van-cell
-        v-for="match in $page.city.matches"
-        :title="match.date"
-        :key="match.date"
-        :to="`/matches/${match.id}`"
-        is-link
-      />
-    </van-cell-group>
+    <pre>{{$page}}</pre>
   </Layout>
 </template>
 

@@ -1,19 +1,14 @@
 <template>
   <Layout>
-    <van-cell-group>
-      <van-cell
-        v-for="opponent in $static.opponents.edges"
-        :to="opponent.node.path"
-        :title="opponent.node.title"
-        :key="opponent.node.title"
-        :value="opponent.node.matches.length"
-        is-link
-      />
-    </van-cell-group>
+    <opponent-block
+      v-for="opponent in $page.opponents.edges"
+      :key="opponent.node.title"
+      :opponent="opponent"
+    ></opponent-block>
   </Layout>
 </template>
 
-<static-query>
+<page-query>
 query {
   opponents: allStrapiOpponents(sortBy: "title", order: ASC) {
     edges {
@@ -27,12 +22,17 @@ query {
     }
   }
 }
-</static-query>
+</page-query>
 
 <script>
+import OpponentBlock from "@/components/OpponentBlock";
+
 export default {
   metaInfo: {
     title: "Соперники"
+  },
+  components: {
+    OpponentBlock
   }
 };
 </script>

@@ -1,19 +1,14 @@
 <template>
   <Layout>
-    <van-cell-group>
-      <van-cell
-        v-for="legioner in $static.legioners.edges"
-        :to="legioner.node.path"
-        :title="legioner.node.title"
-        :key="legioner.node.title"
-        :value="legioner.node.matches.length"
-        is-link
-      />
-    </van-cell-group>
+    <common-block
+      v-for="legioner in $page.legioners.edges"
+      :key="legioner.node.title"
+      :common="legioner"
+    ></common-block>
   </Layout>
 </template>
 
-<static-query>
+<page-query>
 query {
   legioners: allStrapiLegioners (sortBy: "matches") {
     edges {
@@ -27,12 +22,17 @@ query {
     }
   }
 }
-</static-query>
+</page-query>
 
 <script>
+import CommonBlock from "@/components/CommonBlock";
+
 export default {
   metaInfo: {
     title: "Легионеры"
+  },
+  components: {
+    CommonBlock
   }
 };
 </script>
