@@ -1,6 +1,23 @@
 <template>
   <Layout>
-    <pre>{{ $page }}</pre>
+    <p class="legioner__title">{{ $page.legioner.title }}</p>
+    <div class="legioner__map" id="map"></div>
+    <g-link
+      v-for="match in $page.legioner.matches"
+      class="legioner__match"
+      :key="match.date"
+      :to="`/matches/${match.id}`"
+    >
+      <!-- <div class="opponent__left">
+        <opponent-logo
+          class="opponent__logo"
+          :opponent="opponent.node.title"
+          small
+        ></opponent-logo>
+      </div> -->
+      <p>{{ visitedCities.find((x) => x.id == match.city).title }}</p>
+      <p>{{ match.date }}</p>
+    </g-link>
   </Layout>
 </template>
 
@@ -9,8 +26,84 @@ query ($id: ID!) {
   legioner: strapiLegioners(id: $id) {
     title
     matches {
+      id
       date
+      opponent
+      city
+    }
+  }
+  allStrapiCities  {
+    edges {
+      node {
+        id
+        title
+        latitude
+        longitude
+      }
     }
   }
 }
 </page-query>
+
+<script>
+var DG = require("2gis-maps");
+
+export default {
+  computed: {
+    visitedCities() {
+      let filtered = this.$page.legioner.matches.map((x) => x.city);
+      return this.$page.allStrapiCities.edges
+        .map((x) => x.node)
+        .filter((y) => filtered.includes(y.id));
+    },
+  },
+  mounted() {
+    var map = DG.map("map", {
+      center: [48, 68],
+      zoom: 3,
+    });
+
+    for (let i of this.visitedCities) {
+      DG.marker([i.latitude, i.longitude])
+        .addTo(map)
+        .bindPopup(i.title);
+    }
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.legioner {
+  &__title {
+    font-size: 2.8rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  &__map {
+    margin: 1rem 0;
+    width: calc(100vw - 2.8rem);
+    height: calc(60vw - 2.8rem);
+    border-radius: 10px;
+  }
+
+  &__match {
+    background: var(--bg-block);
+    border-radius: 8px;
+    display: flex;
+    margin-bottom: 1rem;
+    justify-content: space-between;
+    padding: 1rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--color-white);
+    overflow: hidden;
+    position: relative;
+    align-items: center;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+</style>

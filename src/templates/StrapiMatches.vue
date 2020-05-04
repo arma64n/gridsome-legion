@@ -25,5 +25,4 @@ query($id: ID!) {
     }
   }
 }
-
 </page-query>

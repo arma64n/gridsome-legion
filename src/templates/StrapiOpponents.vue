@@ -1,10 +1,19 @@
 <template>
-  <div>2222</div>
+  <Layout>
+    <pre>{{ $page }}</pre>
+  </Layout>
 </template>
 
-<script>
-export default {};
-</script>
-
-<style>
-</style>
+<page-query>
+query ($id: ID!){
+  opponent: strapiOpponents (id: $id) {
+    title
+    matches {
+      date
+      id
+      city
+      legioners 
+    }
+  }
+}
+</page-query>
