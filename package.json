@@ -7,7 +7,6 @@
     "explore": "gridsome explore"
   },
   "dependencies": {
-    "2gis-maps": "^3.5.15",
     "@gridsome/source-strapi": "^0.1.0",
     "gridsome": "^0.7.0",
     "normalize.css": "^8.0.1",

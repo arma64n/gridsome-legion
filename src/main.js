@@ -9,4 +9,8 @@ export default function(Vue, { router, head, isClient }) {
   // Set default layout as a global component
   Vue.component("Layout", DefaultLayout);
   Vue.use(InfiniteLoading);
+
+  head.script.push({
+    src: "https://maps.api.2gis.ru/2.0/loader.js?pkg=full",
+  });
 }

@@ -46,8 +46,6 @@ query ($id: ID!) {
 </page-query>
 
 <script>
-var DG = require("2gis-maps");
-
 export default {
   computed: {
     visitedCities() {
@@ -58,16 +56,19 @@ export default {
     },
   },
   mounted() {
-    var map = DG.map("map", {
-      center: [48, 68],
-      zoom: 3,
-    });
+    var map;
+    DG.then(() => {
+      map = DG.map("map", {
+        center: [48, 68],
+        zoom: 3,
+      });
 
-    for (let i of this.visitedCities) {
-      DG.marker([i.latitude, i.longitude])
-        .addTo(map)
-        .bindPopup(i.title);
-    }
+      for (let i of this.visitedCities) {
+        DG.marker([i.latitude, i.longitude])
+          .addTo(map)
+          .bindPopup(i.title);
+      }
+    });
   },
 };
 </script>
