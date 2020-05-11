@@ -61,6 +61,7 @@ export default {
       map = DG.map("map", {
         center: [48, 68],
         zoom: 3,
+        zoomControl: false,
       });
 
       for (let i of this.visitedCities) {

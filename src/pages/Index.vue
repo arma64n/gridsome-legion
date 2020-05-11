@@ -1,11 +1,11 @@
 <template>
-  <Layout>
+  <MainMenu>
     <common-block
       v-for="legioner in $page.legioners.edges"
       :key="legioner.node.title"
       :common="legioner"
     ></common-block>
-  </Layout>
+  </MainMenu>
 </template>
 
 <page-query>
@@ -29,10 +29,10 @@ import CommonBlock from "@/components/CommonBlock";
 
 export default {
   metaInfo: {
-    title: "Легионеры"
+    title: "Легионеры",
   },
   components: {
-    CommonBlock
-  }
+    CommonBlock,
+  },
 };
 </script>

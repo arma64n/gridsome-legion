@@ -32,3 +32,9 @@ p {
 a {
   text-decoration: none;
 }
+
+.red2gisdot {
+  width: 2rem;
+  height: 2rem;
+  display: block;
+}

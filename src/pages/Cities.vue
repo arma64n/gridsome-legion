@@ -1,7 +1,11 @@
 <template>
-  <Layout>
-    <common-block v-for="city in $page.cities.edges" :key="city.node.title" :common="city"></common-block>
-  </Layout>
+  <MainMenu>
+    <common-block
+      v-for="city in $page.cities.edges"
+      :key="city.node.title"
+      :common="city"
+    ></common-block>
+  </MainMenu>
 </template>
 
 <page-query>
@@ -25,10 +29,10 @@ import CommonBlock from "@/components/CommonBlock";
 
 export default {
   metaInfo: {
-    title: "Города"
+    title: "Города",
   },
   components: {
-    CommonBlock
-  }
+    CommonBlock,
+  },
 };
 </script>

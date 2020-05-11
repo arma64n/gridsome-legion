@@ -1,11 +1,11 @@
 <template>
-  <Layout>
+  <MainMenu>
     <opponent-block
       v-for="opponent in $page.opponents.edges"
       :key="opponent.node.title"
       :opponent="opponent"
     ></opponent-block>
-  </Layout>
+  </MainMenu>
 </template>
 
 <page-query>
@@ -29,10 +29,10 @@ import OpponentBlock from "@/components/OpponentBlock";
 
 export default {
   metaInfo: {
-    title: "Соперники"
+    title: "Соперники",
   },
   components: {
-    OpponentBlock
-  }
+    OpponentBlock,
+  },
 };
 </script>
