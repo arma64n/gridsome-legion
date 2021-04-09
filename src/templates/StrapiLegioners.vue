@@ -1,7 +1,8 @@
 <template>
   <Layout>
     <p class="legioner__title">{{ $page.legioner.title }}</p>
-    <div class="legioner__map" id="map"></div>
+    <yearly-chart :matches="$page.legioner.matches"></yearly-chart>
+    <!-- <div class="legioner__map" id="map"></div> -->
     <g-link
       v-for="match in $page.legioner.matches"
       class="legioner__match"
@@ -14,9 +15,9 @@
           :opponent="opponent.node.title"
           small
         ></opponent-logo>
-      </div> -->
+      </div>-->
       <p>{{ visitedCities.find((x) => x.id == match.city).title }}</p>
-      <p>{{ match.date }}</p>
+      <p>{{ new Date(match.date).toDateString() }}</p>
     </g-link>
   </Layout>
 </template>
@@ -46,31 +47,35 @@ query ($id: ID!) {
 </page-query>
 
 <script>
+import YearlyChart from "@/components/YearlyChart";
+
 export default {
+  components: {
+    YearlyChart
+  },
   computed: {
     visitedCities() {
-      let filtered = this.$page.legioner.matches.map((x) => x.city);
+      let filtered = this.$page.legioner.matches.map(x => x.city);
       return this.$page.allStrapiCities.edges
-        .map((x) => x.node)
-        .filter((y) => filtered.includes(y.id));
-    },
+        .map(x => x.node)
+        .filter(y => filtered.includes(y.id));
+    }
   },
   mounted() {
-    var map;
-    DG.then(() => {
-      map = DG.map("map", {
-        center: [48, 68],
-        zoom: 3,
-        zoomControl: false,
-      });
-
-      for (let i of this.visitedCities) {
-        DG.marker([i.latitude, i.longitude])
-          .addTo(map)
-          .bindPopup(i.title);
-      }
-    });
-  },
+    // var map;
+    // DG.then(() => {
+    //   map = DG.map("map", {
+    //     center: [48, 68],
+    //     zoom: 3,
+    //     zoomControl: false
+    //   });
+    //   for (let i of this.visitedCities) {
+    //     DG.marker([i.latitude, i.longitude])
+    //       .addTo(map)
+    //       .bindPopup(i.title);
+    //   }
+    // });
+  }
 };
 </script>
 
