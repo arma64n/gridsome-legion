@@ -1,7 +1,16 @@
 <template>
   <Layout>
-    OK!
-    <pre>{{ $page }}</pre>
+    <div class="match__header">
+      <opponent-logo :opponent="$page.match.opponent.title" class="match__opponent" />
+      <div class="match__score">{{ $page.match.conceded }}-{{ $page.match.scored }}</div>
+      <opponent-logo opponent="Женис" />
+    </div>
+    <div
+      class="match__info"
+    >{{ $page.match.city.title}}, {{ new Date($page.match.date).toDateString() }}</div>
+    <ol class="match__legioners">
+      <li v-for="user in $page.match.legioners">{{user.title}}</li>
+    </ol>
   </Layout>
 </template>
 
@@ -26,3 +35,41 @@ query($id: ID!) {
   }
 }
 </page-query>
+
+<script>
+import OpponentLogo from "@/components/OpponentLogo";
+
+export default {
+  components: {
+    OpponentLogo
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+.match {
+  &__opponent {
+    margin-left: auto;
+  }
+
+  &__header {
+    display: grid;
+    grid-template-columns: 1fr 100px 1fr;
+    align-items: center;
+  }
+
+  &__info {
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  &__score {
+    font-size: 30px;
+    text-align: center;
+  }
+
+  &__legioners {
+    font-size: 20px;
+  }
+}
+</style>

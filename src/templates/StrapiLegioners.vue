@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <p class="legioner__title">{{ $page.legioner.title }}</p>
-    <yearly-chart :matches="$page.legioner.matches"></yearly-chart>
+    <!-- <yearly-chart :matches="$page.legioner.matches"></yearly-chart> -->
     <!-- <div class="legioner__map" id="map"></div> -->
     <g-link
       v-for="match in $page.legioner.matches"

@@ -22,7 +22,6 @@ body {
   font-family: "Nunito", sans-serif;
   background: var(--bg-main);
   color: var(--color-secondary);
-  margin-bottom: 80px;
 }
 
 p {

@@ -13,11 +13,13 @@ export default {
   name: "match-logo",
   props: {
     opponent: String,
-    small: Boolean,
+    small: Boolean
   },
   computed: {
     logo() {
       switch (this.opponent) {
+        case "Женис":
+          return "jenis";
         case "Ак–Булак":
           return "akb";
         case "Акжайык":
@@ -88,8 +90,8 @@ export default {
         default:
           return "nothing";
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -12,7 +12,7 @@
       </div>
       <div class="match__footer">
         <p>{{ match.node.legioners.length }} чел.</p>
-        <p class="match__date">{{ match.node.date }}</p>
+        <p class="match__date">{{ new Date(match.node.date).toDateString() }}</p>
       </div>
     </div>
   </div>
@@ -23,11 +23,11 @@ import OpponentLogo from "@/components/OpponentLogo";
 
 export default {
   components: {
-    OpponentLogo,
+    OpponentLogo
   },
   props: {
-    match: Object,
-  },
+    match: Object
+  }
 };
 </script>
 

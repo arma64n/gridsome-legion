@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-menu">
     <div class="content">
       <slot />
     </div>
@@ -28,7 +28,7 @@ export default {
     IconLegioners,
     IconMatches,
     IconCities,
-    IconOpponents,
+    IconOpponents
   },
   data() {
     return {
@@ -36,14 +36,18 @@ export default {
         { icon: "legioners", path: "/" },
         { icon: "matches", path: "/matches" },
         { icon: "cities", path: "/cities" },
-        { icon: "opponents", path: "/opponents" },
-      ],
+        { icon: "opponents", path: "/opponents" }
+      ]
     };
-  },
+  }
 };
 </script>
 
 <style lang="scss">
+.main-menu {
+  margin-bottom: 80px;
+}
+
 .content {
   padding: 1.4rem;
 }
