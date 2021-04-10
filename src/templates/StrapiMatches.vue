@@ -3,7 +3,7 @@
     <div class="match__header">
       <opponent-logo :opponent="$page.match.opponent.title" class="match__opponent" />
       <div class="match__score">{{ $page.match.conceded }}-{{ $page.match.scored }}</div>
-      <opponent-logo opponent="Женис" />
+      <g-image :src="require(`!!assets-loader!@/assets/clubs/jenis.png`)" class="match__logo"></g-image>
     </div>
     <div
       class="match__info"
@@ -61,6 +61,7 @@ export default {
   &__info {
     margin-top: 1rem;
     text-align: center;
+    font-size: 14px;
   }
 
   &__score {
@@ -69,7 +70,13 @@ export default {
   }
 
   &__legioners {
-    font-size: 20px;
+    font-size: 16px;
+  }
+
+  &__logo {
+    width: 6.2rem;
+    height: 6.2rem;
+    object-fit: contain;
   }
 }
 </style>

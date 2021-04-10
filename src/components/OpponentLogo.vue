@@ -18,8 +18,6 @@ export default {
   computed: {
     logo() {
       switch (this.opponent) {
-        case "Женис":
-          return "jenis";
         case "Ак–Булак":
           return "akb";
         case "Акжайык":
