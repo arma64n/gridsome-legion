@@ -2,6 +2,7 @@
   <Layout>
     <p class="legioner__title">{{ $page.legioner.title }}</p>
     <!-- <yearly-chart :matches="$page.legioner.matches"></yearly-chart> -->
+    <bar-chart :finalObj="filteredMatches"></bar-chart>
     <!-- <div class="legioner__map" id="map"></div> -->
     <g-link
       v-for="match in $page.legioner.matches"
@@ -48,18 +49,34 @@ query ($id: ID!) {
 
 <script>
 import YearlyChart from "@/components/YearlyChart";
+import BarChart from "@/components/BarChart";
 
 export default {
   components: {
-    YearlyChart
+    YearlyChart,
+    BarChart,
   },
   computed: {
     visitedCities() {
-      let filtered = this.$page.legioner.matches.map(x => x.city);
+      let filtered = this.$page.legioner.matches.map((x) => x.city);
       return this.$page.allStrapiCities.edges
-        .map(x => x.node)
-        .filter(y => filtered.includes(y.id));
-    }
+        .map((x) => x.node)
+        .filter((y) => filtered.includes(y.id));
+    },
+    filteredMatches() {
+      const years = this.$page.legioner.matches.map((x) =>
+        new Date(x.date).getFullYear()
+      );
+      const uniqueYears = [...new Set(years)];
+      const minYear = Math.min(...uniqueYears);
+      const maxYear = Math.max(...uniqueYears);
+
+      let obj = {};
+      for (let i = minYear; i <= maxYear; i++) {
+        obj[i] = years.filter((x) => x == i).length;
+      }
+      return obj;
+    },
   },
   mounted() {
     // var map;
@@ -75,7 +92,7 @@ export default {
     //       .bindPopup(i.title);
     //   }
     // });
-  }
+  },
 };
 </script>
 
