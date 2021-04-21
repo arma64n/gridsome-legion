@@ -22,24 +22,27 @@ import IconLegioners from "@/components/icons/IconLegioners";
 import IconMatches from "@/components/icons/IconMatches";
 import IconCities from "@/components/icons/IconCities";
 import IconOpponents from "@/components/icons/IconOpponents";
+import IconYear from "@/components/icons/IconYear";
 
 export default {
   components: {
     IconLegioners,
     IconMatches,
     IconCities,
-    IconOpponents
+    IconOpponents,
+    IconYear,
   },
   data() {
     return {
       links: [
-        { icon: "legioners", path: "/" },
+        { icon: "year", path: "/" },
+        { icon: "legioners", path: "/legioners" },
         { icon: "matches", path: "/matches" },
         { icon: "cities", path: "/cities" },
-        { icon: "opponents", path: "/opponents" }
-      ]
+        { icon: "opponents", path: "/opponents" },
+      ],
     };
-  }
+  },
 };
 </script>
 
