@@ -7,7 +7,7 @@
     </div>
     <div
       class="match__info"
-    >{{ $page.match.city.title}}, {{ new Date($page.match.date).toDateString() }}</div>
+    >{{ $page.match.city.title}}, {{ new Date($page.match.date).toLocaleDateString() }}</div>
     <ol class="match__legioners">
       <li v-for="user in $page.match.legioners">{{user.title}}</li>
     </ol>

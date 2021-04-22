@@ -12,7 +12,7 @@
       </div>
       <div class="match__footer">
         <p>{{ match.node.legioners.length }} чел.</p>
-        <p class="match__date">{{ new Date(match.node.date).toDateString() }}</p>
+        <p class="match__date">{{ new Date(match.node.date).toLocaleDateString() }}</p>
       </div>
     </div>
   </div>

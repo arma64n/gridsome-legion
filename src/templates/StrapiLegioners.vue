@@ -5,7 +5,7 @@
     <bar-chart :finalObj="filteredMatches"></bar-chart>
     <!-- <div class="legioner__map" id="map"></div> -->
     <g-link
-      v-for="match in $page.legioner.matches"
+      v-for="match in $page.legioner.matches.sort((a, b) => new Date(b.date) -  new Date(a.date))"
       class="legioner__match"
       :key="match.date"
       :to="`/matches/${match.id}`"
@@ -18,7 +18,7 @@
         ></opponent-logo>
       </div>-->
       <p>{{ visitedCities.find((x) => x.id == match.city).title }}</p>
-      <p>{{ new Date(match.date).toDateString() }}</p>
+      <p>{{ new Date(match.date).toLocaleDateString() }}</p>
     </g-link>
   </Layout>
 </template>
@@ -54,17 +54,17 @@ import BarChart from "@/components/BarChart";
 export default {
   components: {
     YearlyChart,
-    BarChart,
+    BarChart
   },
   computed: {
     visitedCities() {
-      let filtered = this.$page.legioner.matches.map((x) => x.city);
+      let filtered = this.$page.legioner.matches.map(x => x.city);
       return this.$page.allStrapiCities.edges
-        .map((x) => x.node)
-        .filter((y) => filtered.includes(y.id));
+        .map(x => x.node)
+        .filter(y => filtered.includes(y.id));
     },
     filteredMatches() {
-      const years = this.$page.legioner.matches.map((x) =>
+      const years = this.$page.legioner.matches.map(x =>
         new Date(x.date).getFullYear()
       );
       const uniqueYears = [...new Set(years)];
@@ -73,10 +73,10 @@ export default {
 
       let obj = {};
       for (let i = minYear; i <= maxYear; i++) {
-        obj[i] = years.filter((x) => x == i).length;
+        obj[i] = years.filter(x => x == i).length;
       }
       return obj;
-    },
+    }
   },
   mounted() {
     // var map;
@@ -92,7 +92,7 @@ export default {
     //       .bindPopup(i.title);
     //   }
     // });
-  },
+  }
 };
 </script>
 
