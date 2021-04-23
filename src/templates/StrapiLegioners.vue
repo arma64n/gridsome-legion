@@ -5,7 +5,7 @@
     <bar-chart :finalObj="filteredMatches"></bar-chart>
     <!-- <div class="legioner__map" id="map"></div> -->
     <g-link
-      v-for="match in $page.legioner.matches.sort((a, b) => new Date(b.date) -  new Date(a.date))"
+      v-for="match in sortedMatches"
       class="legioner__match"
       :key="match.date"
       :to="`/matches/${match.id}`"
@@ -63,10 +63,13 @@ export default {
         .map(x => x.node)
         .filter(y => filtered.includes(y.id));
     },
-    filteredMatches() {
-      const years = this.$page.legioner.matches.map(x =>
-        new Date(x.date).getFullYear()
+    sortedMatches() {
+      return this.$page.legioner.matches.sort(
+        (a, b) => new Date(b.date) - new Date(a.date)
       );
+    },
+    filteredMatches() {
+      const years = this.sortedMatches.map(x => new Date(x.date).getFullYear());
       const uniqueYears = [...new Set(years)];
       const minYear = Math.min(...uniqueYears);
       const maxYear = Math.max(...uniqueYears);
