@@ -1,11 +1,11 @@
 <template>
-  <MainMenu>
+  <Layout>
     <common-block
       v-for="legioner in $page.legioners.edges"
       :key="legioner.node.title"
       :common="legioner"
     ></common-block>
-  </MainMenu>
+  </Layout>
 </template>
 
 <page-query>

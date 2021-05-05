@@ -1,11 +1,11 @@
 <template>
-  <MainMenu>
+  <Layout>
     <common-block
       v-for="city in $page.cities.edges"
       :key="city.node.title"
       :common="city"
     ></common-block>
-  </MainMenu>
+  </Layout>
 </template>
 
 <page-query>

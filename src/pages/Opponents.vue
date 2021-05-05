@@ -1,11 +1,11 @@
 <template>
-  <MainMenu>
+  <Layout>
     <opponent-block
       v-for="opponent in $page.opponents.edges"
       :key="opponent.node.title"
       :opponent="opponent"
     ></opponent-block>
-  </MainMenu>
+  </Layout>
 </template>
 
 <page-query>

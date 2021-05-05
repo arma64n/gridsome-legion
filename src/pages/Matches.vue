@@ -1,5 +1,5 @@
 <template>
-  <MainMenu>
+  <Layout>
     <div>
       <transition-group name="fade">
         <match-block
@@ -17,7 +17,7 @@
         >
       </ClientOnly>
     </div>
-  </MainMenu>
+  </Layout>
 </template>
 
 <page-query>

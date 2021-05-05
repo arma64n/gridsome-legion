@@ -1,14 +1,14 @@
 <template>
   <Layout>
-    <h1 style="margin-top: 0;">{{opponent.title}}</h1>
+    <h1 style="margin-top: 0;">{{ opponent.title }}</h1>
     <g-link
-      v-for="match in opponent.matches.sort((a, b) => new Date(b.date) - new Date(a.date))"
+      v-for="match in sortedArray"
       :to="`/matches/${match.id}`"
       :key="match.id"
       class="common"
     >
-      <p>{{new Date(match.date).toLocaleDateString()}}</p>
-      <p>{{match.legioners.length}} чел.</p>
+      <p>{{ new Date(match.date).toLocaleDateString() }}</p>
+      <p>{{ match.legioners.length }} чел.</p>
     </g-link>
   </Layout>
 </template>
@@ -32,8 +32,13 @@ export default {
   computed: {
     opponent() {
       return this.$page.opponent;
-    }
-  }
+    },
+    sortedArray() {
+      return this.opponent.matches.sort(
+        (a, b) => new Date(b.date) - new Date(a.date)
+      );
+    },
+  },
 };
 </script>
 
