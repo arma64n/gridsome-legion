@@ -1,8 +1,17 @@
 <template>
   <Layout>
     <p class="legioner__title">{{ $page.legioner.title }}</p>
-    <!-- <yearly-chart :matches="$page.legioner.matches"></yearly-chart> -->
     <bar-chart :finalObj="filteredMatches"></bar-chart>
+    <div v-if="sortedMatches.length >= 10" class="legioner__highlights">
+      <h2>ТОП-3</h2>
+      <ol>
+        <li v-for="item in highlights" :key="item.id">
+          {{item.title}}
+          <span style="color: var(--bg-footer)">{{item.count}}</span>
+        </li>
+        <p v-if="!showAll" @click="showAll = true" class="legioner__toggle">Показать все</p>
+      </ol>
+    </div>
     <!-- <div class="legioner__map" id="map"></div> -->
     <g-link
       v-for="match in sortedMatches"
@@ -48,13 +57,16 @@ query ($id: ID!) {
 </page-query>
 
 <script>
-import YearlyChart from "@/components/YearlyChart";
 import BarChart from "@/components/BarChart";
 
 export default {
   components: {
-    YearlyChart,
     BarChart
+  },
+  data() {
+    return {
+      showAll: false
+    };
   },
   computed: {
     visitedCities() {
@@ -79,6 +91,24 @@ export default {
         obj[i] = years.filter(x => x == i).length;
       }
       return obj;
+    },
+    topThree() {
+      let newArr = [];
+      for (let i of this.sortedMatches) {
+        if (newArr.find(x => x.id == i.city)) {
+          newArr.find(x => x.id == i.city).count++;
+        } else {
+          newArr.push({
+            id: i.city,
+            title: this.visitedCities.find(x => x.id == i.city).title,
+            count: 1
+          });
+        }
+      }
+      return newArr.sort((a, b) => b.count - a.count);
+    },
+    highlights() {
+      return this.showAll ? this.topThree : this.topThree.slice(0, 3);
     }
   },
   mounted() {
@@ -131,6 +161,19 @@ export default {
     &:last-child {
       margin-bottom: 0;
     }
+  }
+
+  &__highlights {
+    font-size: 1.5rem;
+    background: var(--bg-gradient);
+    padding: 0.5rem;
+    margin: 1rem 0;
+    border-radius: 5px;
+  }
+
+  &__toggle {
+    cursor: pointer;
+    color: var(--color-accent);
   }
 }
 </style>
