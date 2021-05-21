@@ -18,6 +18,8 @@ export default {
   computed: {
     logo() {
       switch (this.opponent) {
+        case "Жетысу":
+          return "zhet";
         case "Ак–Булак":
           return "akb";
         case "Акжайык":
